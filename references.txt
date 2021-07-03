@@ -8,4 +8,4 @@ QUICK SORT:
 	2. https://www.geeksforgeeks.org/quick-sort/
 
 BUBBLE SORT:
-	1. XXX
+	1. https://www.geeksforgeeks.org/bubble-sort/
