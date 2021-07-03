@@ -1,18 +1,17 @@
 #include <iostream>
-using namespace std;
 
 void printArray(int arr[], int arrSize)
 {
 	for(int i=0; i<arrSize; i++){
-		cout << arr[i] << " ";
+		std::cout << arr[i] << " ";
 	}
-	cout << endl;
+	std::cout << std::endl;
 }
 
 //used to swap 2 values
 void swap(int* a, int* b)
 {
-	cout << "SWAPPING: " << *a << " AND " << *b << endl;
+	std::cout << "SWAPPING: " << *a << " AND " << *b << std::endl;
 	int temp = *a;
 	*a = *b;
 	*b = temp;
@@ -36,7 +35,7 @@ void bubbleSort(int arr[], int arrSize)
 			{
 				swap(&arr[j], &arr[j+1]);
 				printArray(arr, arrSize);
-				cout << endl;
+				std::cout << std::endl;
 			}
 		}
 	}
@@ -44,21 +43,21 @@ void bubbleSort(int arr[], int arrSize)
 
 int main()
 {
-	cout << "BUBBLE SORT" << endl;
+	std::cout << "BUBBLE SORT" << std::endl;
 
 	//array info
-	int arrSize = 6;
+	int arrSize = 7;
 	int arr[arrSize] = {5, 1, 4, 2, 8, 3};
 	
 	//unorganized array:
-	cout << "UNORGANIZED ARRAY: ";
+	std::cout << "UNORGANIZED ARRAY: ";
 	printArray(arr, arrSize);
 	
 	//run sort algorithm
 	bubbleSort(arr, arrSize);
 
 	//organized array
-	cout << "FINAL ARRAY: ";
+	std::cout << "FINAL ARRAY: ";
 	printArray(arr, arrSize);
 
 	return 0;
