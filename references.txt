@@ -1,0 +1,11 @@
+REFERENCES USED FOR EACH ALGO:
+
+SELECTION SORT:
+	1. https://www.geeksforgeeks.org/selection-sort/ 
+
+QUICK SORT: 
+	1. https://en.wikipedia.org/wiki/Quicksort
+	2. https://www.geeksforgeeks.org/quick-sort/
+
+BUBBLE SORT:
+	1. XXX
