@@ -7,5 +7,12 @@ QUICK SORT:
 	1. https://en.wikipedia.org/wiki/Quicksort
 	2. https://www.geeksforgeeks.org/quick-sort/
 
+MERGE SORT:
+	1. https://en.wikipedia.org/wiki/Merge_sort
+	2. https://www.geeksforgeeks.org/merge-sort/
+
 BUBBLE SORT:
 	1. https://www.geeksforgeeks.org/bubble-sort/
+
+LINKED LIST:
+	1. https://en.wikipedia.org/wiki/Linked_list
