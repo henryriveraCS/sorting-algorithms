@@ -1,57 +1,70 @@
 #include <iostream>
 //#define arrSize 6
 
-struct linkedItem
+class Node
 {
-	int value;
-	struct linkedItem *nextPtr;	
+	public:
+		int data;
+		Node *next;
 };
 
-//used to create the linked list if given an array
-void createLinkedList(struct linkedItem linkedList[], int arr[], int arrSize)
+/*
+void appendAfter(Node *prev_node, int new_data)
 {
-	//initialize the linked items first, iterate over it again to add pointer
-	for(int i = 0; i <= arrSize; i++)
+	if(prev_node == NULL)
 	{
-		struct linkedItem e;
-		e.value = arr[i];
-		linkedList[i] = e;
+		std::cout << "PREVIOS NODE CANNOT BE NULL \n";
+		return;
 	}
-
-	//add the pointer now that we added everything
-	for(int i = 0; i <= arrSize; i++)
-	{
-		//check if next item.value exists to add a pointer
-		if(&linkedList[i+1])
-		{
-			linkedList[i].nextPtr = &linkedList[i+1];	
-		}
-	}
+	//while there is a node -> keep going until there isn't so we can add new node with value new_data
+	Node new_node;
+	new_node->data = new_data;
+	prev_node->next = new_node;
 }
+*/
 
-void printList(struct linkedItem linkedList[], int arrSize)
+//this will append to end of linked list
+void appendNode(Node **head, int new_data)
 {
-	for(int i = 0; i <= arrSize; i++)
-	{
-		struct linkedItem e = linkedList[i];
-		if(e.value)
-		{
-			std::cout << e.value << ", ";
-		}
-	}
-}
-
-void reverseList(struct linkedItem reversedList[], struct linkedItem linkedList[], int arrSize)
-{
+	Node *new_node = new Node();
+	new_node->data = new_data;
+	new_node->next = NULL;
 	
-	int i = 0;
-	struct linkedItem e;
+	//pointer used to get the last node currently in linked list
+	Node *last_node = *head;
+	
+	//check if head node is empty -> if it does make the new node the head
+	if(*head == NULL)
+	{
+		*head = new_node;
+		return;
+	}
+
+	//otherwise iterate through linked list and get last node then append new node
+	while(last_node->next != NULL)
+	{
+		last_node = last_node->next;
+	}
+
+	last_node->next = new_node;
+	return;
+}
+
+void printList(Node **head)
+{
+	Node *c_node = *head;
+	while(c_node != NULL)
+	{
+		std::cout << c_node->data << ", ";
+		c_node = c_node->next;
+	}	
+}
+
+void createLinkedList(Node **head, int arr[], int arrSize)
+{
 	for(int i = 0; i <= arrSize; i++)
 	{
-		struct linkedItem t = linkedList[arrSize - i];
-		//pointer now goes to previous value
-		t.nextPtr = &linkedList[arrSize - i - 1];
-		reversedList[i] = t;
+		appendNode(head, arr[i]);
 	}
 }
 
@@ -59,19 +72,13 @@ int main()
 {
 	int arrSize = 6;
 	int arr[] = {10, 80, 30, 90, 40, 50, 70}; 
-	struct linkedItem linkedList[arrSize];
 
+	//initialize head of node
+	Node *head = NULL;
 	//create linked list
-	createLinkedList(linkedList, arr, arrSize);
+	createLinkedList(&head, arr, arrSize);
 
-	std::cout << "ORIGINAL LIST: ";
-	printList(linkedList, arrSize);
-
-	struct linkedItem reversedList[arrSize];
-	reverseList(reversedList, linkedList, arrSize);
-	std::cout << std::endl;
-	std::cout << "REVERSED LIST: ";
-	printList(reversedList, arrSize);
+	printList(&head);
 	
 	return 0;
 }
