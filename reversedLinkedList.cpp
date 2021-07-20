@@ -41,9 +41,8 @@ void printList(struct linkedItem linkedList[], int arrSize)
 	}
 }
 
-void reverseList(struct linkedItem linkedList[], int arrSize)
+void reverseList(struct linkedItem reversedList[], struct linkedItem linkedList[], int arrSize)
 {
-	struct linkedItem reversedList[arrSize];
 	
 	int i = 0;
 	struct linkedItem e;
@@ -51,7 +50,8 @@ void reverseList(struct linkedItem linkedList[], int arrSize)
 	{
 		struct linkedItem t = linkedList[arrSize - i];
 		//pointer now goes to previous value
-		t.nextPtr = &linkedList[arrSize - i + 1];
+		t.nextPtr = &linkedList[arrSize - i - 1];
+		reversedList[i] = t;
 	}
 }
 
@@ -66,6 +66,12 @@ int main()
 
 	std::cout << "ORIGINAL LIST: ";
 	printList(linkedList, arrSize);
+
+	struct linkedItem reversedList[arrSize];
+	reverseList(reversedList, linkedList, arrSize);
+	std::cout << std::endl;
+	std::cout << "REVERSED LIST: ";
+	printList(reversedList, arrSize);
 	
 	return 0;
 }
