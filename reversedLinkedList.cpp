@@ -41,9 +41,18 @@ void printList(struct linkedItem linkedList[], int arrSize)
 	}
 }
 
-void reverseList(int arrSize)
+void reverseList(struct linkedItem linkedList[], int arrSize)
 {
-	struct linkedItem linkedList[arrSize];
+	struct linkedItem reversedList[arrSize];
+	
+	int i = 0;
+	struct linkedItem e;
+	for(int i = 0; i <= arrSize; i++)
+	{
+		struct linkedItem t = linkedList[arrSize - i];
+		//pointer now goes to previous value
+		t.nextPtr = &linkedList[arrSize - i + 1];
+	}
 }
 
 int main()
