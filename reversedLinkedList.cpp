@@ -8,21 +8,6 @@ class Node
 		Node *next;
 };
 
-/*
-void appendAfter(Node *prev_node, int new_data)
-{
-	if(prev_node == NULL)
-	{
-		std::cout << "PREVIOS NODE CANNOT BE NULL \n";
-		return;
-	}
-	//while there is a node -> keep going until there isn't so we can add new node with value new_data
-	Node new_node;
-	new_node->data = new_data;
-	prev_node->next = new_node;
-}
-*/
-
 //this will append to end of linked list
 void appendNode(Node **head, int new_data)
 {
@@ -60,6 +45,83 @@ void printList(Node **head)
 	}	
 }
 
+void getLastNode(Node **prev_node, Node **last_node, Node **head)
+{
+	Node *current_node = *head;
+
+	while(current_node->next)
+	{
+		//update prev node to keep track of node right before the last node
+		if(current_node->next)
+		{
+			*prev_node = current_node;
+		}
+		current_node = current_node->next;	
+		*last_node = current_node;
+	}
+}
+
+void popNode(Node *node, Node **head)
+{
+	Node *prev_node;
+	Node *next_node;
+	Node *current_node = *head;
+	if(head == NULL)
+	{
+		std::cout << "HEAD IS EMPTY\n";
+		return;
+	}
+
+	while(current_node != node)
+	{
+		prev_node = current_node;
+		current_node = current_node->next;	
+	}
+	//now that current_node = the node we want to remove -> update the ptr on prev node
+	prev_node->next = current_node->next;
+	//OPTIONAL PARAMETER, SHOULDNT MATTER SINCE current_node HAS NOTHING POINTING TO IT
+	//current_node = NULL;
+}
+
+void reverseList(Node **reverseHead, Node **head)
+{
+	Node *last_node = *head;
+	Node *prev_node = *head; 
+	Node *c_node = *head;
+	Node *new_head;
+
+	//get the last node
+	getLastNode(&prev_node, &last_node, head);
+
+	//start reversing the list:
+	while(c_node->next)
+	{
+		if(c_node->next)
+		{
+			std::cout << "\nNEW NODE LIST: ";
+			printList(&new_head);
+			std::cout << std::endl;
+			std::cout << "\nOLD NODE LIST: ";
+			printList(head);
+			std::cout << "\nPREV NODE: " << prev_node->data << std::endl;
+
+			last_node->next = prev_node;	
+			appendNode(&new_head, last_node->data);
+
+			prev_node->next = NULL;
+			getLastNode(&prev_node, &last_node, head);
+		}
+	}
+
+	//manually re-assign the first node in original head to new head
+	std::cout << "\nRE-ASSIGNING FIRST TWO NODES: " << std::endl;
+	appendNode(&new_head, c_node->data);
+	popNode(c_node, head);
+
+	std::cout << "\n\nREVERSED NODE LIST: ";
+	printList(&new_head);
+}
+
 void createLinkedList(Node **head, int arr[], int arrSize)
 {
 	for(int i = 0; i <= arrSize; i++)
@@ -77,8 +139,14 @@ int main()
 	Node *head = NULL;
 	//create linked list
 	createLinkedList(&head, arr, arrSize);
-
+	
+	std::cout << "ORIGINAL NODE LIST: ";
 	printList(&head);
+
+	//reverse the list
+	Node *reverseHead = new Node();
+	reverseList(&reverseHead, &head);
+
 	
 	return 0;
 }
