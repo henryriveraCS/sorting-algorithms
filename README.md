@@ -1,1 +1,1 @@
-<h1> Sorting algorithms in C++ for learning purposes </h1>
+<h1>algorithms in C++ for learning purposes </h1>
